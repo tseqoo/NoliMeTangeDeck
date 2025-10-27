@@ -74,33 +74,78 @@ const characters = [
 let remainingIndices = characters.map((_, i) => i);
 let currentRotation = 0;
 
-// Category colors
+// Category colors - one color per category
 const categoryColors = {
-  "Main Character": ['#e74c3c', '#c0392b'],
-  "Clergy / Church Workers": ['#9b59b6', '#8e44ad'],
-  "Government / Authority Figures": ['#3498db', '#2980b9'],
-  "Upper-Class / Educated Citizens": ['#f39c12', '#e67e22'],
-  "Commoners / Poor or Working-Class": ['#16a085', '#1abc9c'],
-  "María Clara's Friends": ['#e91e63', '#c2185b'],
-  "Other Supporting / Minor Townsfolk": ['#95a5a6', '#7f8c8d']
+  "Main Character": '#e74c3c',
+  "Clergy / Church Workers": '#9b59b6',
+  "Government / Authority Figures": '#3498db',
+  "Upper-Class / Educated Citizens": '#f39c12',
+  "Commoners / Poor or Working-Class": '#16a085',
+  "María Clara's Friends": '#e91e63',
+  "Other Supporting / Minor Townsfolk": '#95a5a6'
 };
 
-// Generate wheel segments
+// Generate wheel segments using canvas drawing
 function createWheel() {
-  const segmentAngle = 360 / 51;
-
+  const canvas = document.createElement('canvas');
+  canvas.width = 400;
+  canvas.height = 400;
+  const ctx = canvas.getContext('2d');
+  
+  const centerX = 200;
+  const centerY = 200;
+  const radius = 200;
+  const segmentAngle = (Math.PI * 2) / 51;
+  
+  // Draw each segment
   characters.forEach((character, index) => {
-    const segment = document.createElement('div');
-    segment.className = 'wheel-segment';
+    const startAngle = index * segmentAngle - Math.PI / 2;
+    const endAngle = startAngle + segmentAngle;
     
-    const colors = categoryColors[character.category];
-    const colorIndex = index % 2;
-    segment.style.background = colors[colorIndex];
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+    ctx.closePath();
     
-    segment.style.transform = `rotate(${index * segmentAngle}deg)`;
-    segment.textContent = (index + 1).toString();
-    wheel.insertBefore(segment, wheel.querySelector('.wheel-center'));
+    // Alternate between lighter and darker shades
+    const baseColor = categoryColors[character.category];
+    ctx.fillStyle = index % 2 === 0 ? baseColor : shadeColor(baseColor, -15);
+    ctx.fill();
+    
+    // Draw segment border
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    
+    // Draw number
+    ctx.save();
+    ctx.translate(centerX, centerY);
+    ctx.rotate(startAngle + segmentAngle / 2);
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = 'white';
+    ctx.font = 'bold 12px Arial';
+    ctx.shadowColor = 'rgba(0,0,0,0.5)';
+    ctx.shadowBlur = 3;
+    ctx.fillText((index + 1).toString(), radius * 0.75, 0);
+    ctx.restore();
   });
+  
+  // Set wheel background to the canvas
+  wheel.style.backgroundImage = `url(${canvas.toDataURL()})`;
+  wheel.style.backgroundSize = 'cover';
+}
+
+// Helper function to darken/lighten colors
+function shadeColor(color, percent) {
+  const num = parseInt(color.replace("#",""), 16);
+  const amt = Math.round(2.55 * percent);
+  const R = (num >> 16) + amt;
+  const G = (num >> 8 & 0x00FF) + amt;
+  const B = (num & 0x0000FF) + amt;
+  return "#" + (0x1000000 + (R<255?R<1?0:R:255)*0x10000 +
+    (G<255?G<1?0:G:255)*0x100 + (B<255?B<1?0:B:255))
+    .toString(16).slice(1);
 }
 
 createWheel();
