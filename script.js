@@ -1,69 +1,170 @@
 const wheel = document.getElementById("wheel");
 const spinBtn = document.getElementById("spin-btn");
 const result = document.getElementById("result");
+const progressText = document.getElementById("progressText");
 
-// Numbers 1–10 (each represents a slice)
-let remainingNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// 51 characters from Noli Me Tangere - organized by category
+const characters = [
+  // A. Main / Central Characters (16)
+  { name: "Juan Crisóstomo Ibarra y Magsalin", category: "Main Character" },
+  { name: "María Clara", category: "Main Character" },
+  { name: "Elías", category: "Main Character" },
+  { name: "Captain Tiago", category: "Main Character" },
+  { name: "Father Dámaso Verdolagas", category: "Main Character" },
+  { name: "Father Salvi", category: "Main Character" },
+  { name: "Don Rafael Ibarra", category: "Main Character" },
+  { name: "Pilosopo Tasyo", category: "Main Character" },
+  { name: "Doña Victorina de los Reyes de Espadaña", category: "Main Character" },
+  { name: "Don Tiburcio de Espadaña", category: "Main Character" },
+  { name: "Sisa", category: "Main Character" },
+  { name: "Basilio", category: "Main Character" },
+  { name: "Crispin", category: "Main Character" },
+  { name: "Doña Consolación", category: "Main Character" },
+  { name: "The Ensign (The Alférez)", category: "Main Character" },
+  { name: "Father Sibyla", category: "Main Character" },
+  
+  // B. Clergy / Church Workers (2)
+  { name: "The Chief Sexton", category: "Clergy / Church Workers" },
+  { name: "The Gravedigger", category: "Clergy / Church Workers" },
+  
+  // C. Government / Authority Figures (8)
+  { name: "Lt. Guevara", category: "Government / Authority Figures" },
+  { name: "The Mayor", category: "Government / Authority Figures" },
+  { name: "Captain General", category: "Government / Authority Figures" },
+  { name: "Don Filipo", category: "Government / Authority Figures" },
+  { name: "Captain Basilio", category: "Government / Authority Figures" },
+  { name: "Captain Tinong", category: "Government / Authority Figures" },
+  { name: "Captain Valentin", category: "Government / Authority Figures" },
+  { name: "Captain Maria", category: "Government / Authority Figures" },
+  
+  // D. Upper-Class / Educated Citizens (9)
+  { name: "Doña Pia Alba", category: "Upper-Class / Educated Citizens" },
+  { name: "Aunt Isabel", category: "Upper-Class / Educated Citizens" },
+  { name: "Linares", category: "Upper-Class / Educated Citizens" },
+  { name: "Don Pedro Eibarramendia", category: "Upper-Class / Educated Citizens" },
+  { name: "Don Saturnino", category: "Upper-Class / Educated Citizens" },
+  { name: "Don Primitivo", category: "Upper-Class / Educated Citizens" },
+  { name: "The Schoolmaster", category: "Upper-Class / Educated Citizens" },
+  { name: "The Yellowish Individual", category: "Upper-Class / Educated Citizens" },
+  { name: "Tinchang", category: "Upper-Class / Educated Citizens" },
+  
+  // E. Commoners / Poor or Working-Class (9)
+  { name: "Lucas", category: "Commoners / Poor or Working-Class" },
+  { name: "Tarsilo Alasigan", category: "Commoners / Poor or Working-Class" },
+  { name: "Bruno Alasigan", category: "Commoners / Poor or Working-Class" },
+  { name: "Captain Pablo", category: "Commoners / Poor or Working-Class" },
+  { name: "Nol Juan", category: "Commoners / Poor or Working-Class" },
+  { name: "Balat", category: "Commoners / Poor or Working-Class" },
+  { name: "Carlicos", category: "Commoners / Poor or Working-Class" },
+  { name: "Andong", category: "Commoners / Poor or Working-Class" },
+  { name: "Hermana Rufa", category: "Commoners / Poor or Working-Class" },
+  
+  // F. María Clara's Friends (5)
+  { name: "Iday", category: "María Clara's Friends" },
+  { name: "Sinang", category: "María Clara's Friends" },
+  { name: "Andeng", category: "María Clara's Friends" },
+  { name: "Victoria", category: "María Clara's Friends" },
+  { name: "Neneng", category: "María Clara's Friends" },
+  
+  // G. Other Supporting / Minor Townsfolk (2)
+  { name: "Albino", category: "Other Supporting / Minor Townsfolk" },
+  { name: "Leon", category: "Other Supporting / Minor Townsfolk" }
+];
+
+let remainingIndices = characters.map((_, i) => i);
+let currentRotation = 0;
+
+// Category colors
+const categoryColors = {
+  "Main Character": ['#e74c3c', '#c0392b'],
+  "Clergy / Church Workers": ['#9b59b6', '#8e44ad'],
+  "Government / Authority Figures": ['#3498db', '#2980b9'],
+  "Upper-Class / Educated Citizens": ['#f39c12', '#e67e22'],
+  "Commoners / Poor or Working-Class": ['#16a085', '#1abc9c'],
+  "María Clara's Friends": ['#e91e63', '#c2185b'],
+  "Other Supporting / Minor Townsfolk": ['#95a5a6', '#7f8c8d']
+};
+
+// Generate wheel segments
+function createWheel() {
+  const segmentAngle = 360 / 51;
+
+  characters.forEach((character, index) => {
+    const segment = document.createElement('div');
+    segment.className = 'wheel-segment';
+    
+    const colors = categoryColors[character.category];
+    const colorIndex = index % 2;
+    segment.style.background = colors[colorIndex];
+    
+    segment.style.transform = `rotate(${index * segmentAngle}deg)`;
+    segment.textContent = (index + 1).toString();
+    wheel.insertBefore(segment, wheel.querySelector('.wheel-center'));
+  });
+}
+
+createWheel();
 
 spinBtn.addEventListener("click", () => {
-  if (remainingNumbers.length === 0) {
-    result.textContent = "🎉 All cards have been drawn!";
-    spinBtn.disabled = true;
+  if (remainingIndices.length === 0) {
+    result.textContent = "🎉 All characters have been revealed!";
     return;
   }
 
-  // Pick a random number from the remaining ones
-  const randomIndex = Math.floor(Math.random() * remainingNumbers.length);
-  const selectedNumber = remainingNumbers[randomIndex];
+  const randomIndex = Math.floor(Math.random() * remainingIndices.length);
+  const selectedIndex = remainingIndices[randomIndex];
+  const selectedCharacter = characters[selectedIndex];
 
-  // Each slice = 36 degrees (360 / 10)
-  const slice = 36;
-  const randomDegree = 360 * 5 + (selectedNumber - 1) * slice + slice / 2;
+  const segmentAngle = 360 / 51;
+  const targetAngle = selectedIndex * segmentAngle;
+  const spins = 360 * 8;
+  const finalRotation = spins + (360 - targetAngle) + (segmentAngle / 2);
+  
+  currentRotation += finalRotation;
 
-  // Spin animation
-  wheel.style.transition = "transform 4s ease-out";
-  wheel.style.transform = `rotate(${randomDegree}deg)`;
-
+  wheel.style.transform = `rotate(${currentRotation}deg)`;
   spinBtn.disabled = true;
-  result.textContent = "Spinning... 🎯";
+  result.textContent = "🎯 Spinning...";
 
-  // Wait for the spin animation to finish
   setTimeout(() => {
-    const imageSrc = `cards/card${selectedNumber}.jpg`;
+    const imageSrc = `cards/card${selectedIndex + 1}.jpg`;
 
-    // Show basic result text
     result.innerHTML = `
-      <p>You drew Card ${selectedNumber}!</p>
-      <img src="${imageSrc}" width="120" style="border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.3);">
+      <p><strong>${selectedCharacter.name}</strong></p>
+      <div class="category-badge">${selectedCharacter.category}</div>
+      <img src="${imageSrc}" alt="${selectedCharacter.name}" onerror="this.src='cards/card${selectedIndex + 1}.png'">
     `;
 
-    // Remove selected number
-    remainingNumbers.splice(randomIndex, 1);
+    remainingIndices.splice(randomIndex, 1);
+    progressText.textContent = `${remainingIndices.length} character${remainingIndices.length !== 1 ? 's' : ''} remaining`;
 
-    // Show popup fullscreen card + confetti
-    showCardPopup(imageSrc);
+    showCardPopup(imageSrc, selectedCharacter);
 
     spinBtn.disabled = false;
 
-    if (remainingNumbers.length === 0) {
-      result.innerHTML += "<p>🎉 All cards have been drawn!</p>";
+    if (remainingIndices.length === 0) {
+      result.innerHTML += "<p style='margin-top:15px;'>🎉 All characters revealed!</p>";
       spinBtn.disabled = true;
     }
-  }, 4000); // Match spin duration
+  }, 5000);
 });
 
-// 🌟 POPUP + CONFETTI FUNCTIONS
-function showCardPopup(imageSrc) {
+function showCardPopup(imageSrc, character) {
   const popup = document.getElementById("cardPopup");
   const popupImage = document.getElementById("popupImage");
+  const popupCharacterName = document.getElementById("popupCharacterName");
+  const popupCategory = document.getElementById("popupCategory");
 
   popupImage.src = imageSrc;
+  popupImage.onerror = () => {
+    popupImage.src = imageSrc.replace('.jpg', '.png');
+  };
+  popupCharacterName.textContent = character.name;
+  popupCategory.textContent = character.category;
   popup.style.display = "flex";
 
-  // 🎊 Start confetti
   startConfetti();
 
-  // Click anywhere to close popup
   popup.onclick = () => {
     popup.style.display = "none";
     stopConfetti();
@@ -71,15 +172,16 @@ function showCardPopup(imageSrc) {
 }
 
 function startConfetti() {
-  const duration = 3 * 1000; // 3 seconds
+  const duration = 3 * 1000;
   const end = Date.now() + duration;
 
   (function frame() {
     confetti({
-      particleCount: 6,
-      spread: 70,
-      startVelocity: 40,
+      particleCount: 7,
+      spread: 80,
+      startVelocity: 45,
       origin: { y: 0.6 },
+      colors: ['#ffeb3b', '#fdd835', '#fbc02d']
     });
     if (Date.now() < end) {
       requestAnimationFrame(frame);
@@ -88,5 +190,5 @@ function startConfetti() {
 }
 
 function stopConfetti() {
-  // Optional cleanup (canvas-confetti handles it automatically)
+  confetti.reset();
 }

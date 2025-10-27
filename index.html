@@ -3,30 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spin the Wheel</title>
+  <title>Noli Me Tangere - Spin the Wheel</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>🎡 Spin the Wheel!</h1>
-
-  <div class="wheel-container">
-    <div id="wheel"></div>
+  <h1>🎡 Noli Me Tangere Character Wheel</h1>
+  
+  <div class="progress">
+    <span id="progressText">51 characters remaining</span>
   </div>
 
-  <!-- Fullscreen card popup -->
-  <div id="cardPopup">
-    <div id="cardPopupContent">
-      <img id="popupImage" src="" alt="">
+  <div class="wheel-container">
+    <div class="pointer"></div>
+    <div id="wheel">
+      <div class="wheel-center">SPIN</div>
     </div>
   </div>
 
-  <button id="spin-btn">SPIN</button>
-  <div id="result"></div>
+  <button id="spin-btn">SPIN THE WHEEL</button>
+  <div id="result">Spin to reveal a character!</div>
 
-  <!-- 🎊 Confetti library (must come before script.js) -->
+  <div id="cardPopup">
+    <div id="cardPopupContent">
+      <img id="popupImage" src="" alt="">
+      <div class="popup-text" id="popupCharacterName"></div>
+      <div class="popup-category" id="popupCategory"></div>
+      <div class="close-hint">Click anywhere to close</div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
   <script src="script.js"></script>
-
 </body>
 </html>
