@@ -516,9 +516,9 @@ function nextRound(wasCorrect) {
 }
 
 
-function startTimer() {
+function startTimer(initialTime = 30) {
   clearInterval(timerInterval);
-  timeRemaining = 30;
+  timeRemaining = initialTime;
   updateTimer();
 
   timerInterval = setInterval(() => {
@@ -565,6 +565,7 @@ function checkGuess() {
 
   if (normalizedGuess === "") return;
 
+  const previousTimeRemaining = timeRemaining;
   guessInput.disabled = true;
   submitGuessBtn.disabled = true;
   clearInterval(timerInterval);
@@ -593,7 +594,9 @@ function checkGuess() {
     submitGuessBtn.disabled = false;
     guessInput.value = "";
     guessInput.focus();
-    startTimer();
+    if (previousTimeRemaining > 0) {
+      startTimer(previousTimeRemaining);
+    }
   }
 }
 
