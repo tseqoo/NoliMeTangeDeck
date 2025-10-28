@@ -17,6 +17,8 @@ const guessInput = document.getElementById("guessInput");
 const submitGuessBtn = document.getElementById("submitGuessBtn");
 const gameCardImage = document.getElementById("gameCardImage");
 const blurOverlay = document.getElementById("blurOverlay");
+const blurName = document.getElementById("blurName");
+const blurImage = document.getElementById("blurImage");
 const gameResult = document.getElementById("gameResult");
 const hintBox = document.getElementById("hintBox");
 const timerFill = document.getElementById("timerFill");
@@ -24,6 +26,12 @@ const timerText = document.getElementById("timerText");
 const scoreValue = document.getElementById("scoreValue");
 const streakValue = document.getElementById("streakValue");
 const roundValue = document.getElementById("roundValue");
+
+if (gameCardImage) {
+  gameCardImage.setAttribute("draggable", "false");
+  gameCardImage.addEventListener("dragstart", (event) => event.preventDefault());
+  gameCardImage.addEventListener("contextmenu", (event) => event.preventDefault());
+}
 
 // 51 characters from Noli Me Tangere - organized by category
 const characters = [
@@ -485,15 +493,13 @@ function nextRound(wasCorrect) {
   currentCharacterIndex = gameCharacterPool[randomIndex];
   gameCharacterPool.splice(randomIndex, 1);
 
+  showBlurOverlays();
+
   const imageSrc = `cards/card${currentCharacterIndex + 1}.jpg`;
   gameCardImage.src = imageSrc;
   gameCardImage.onerror = () => {
     gameCardImage.src = `cards/card${currentCharacterIndex + 1}.png`;
   };
-
-  // ✅ Show blur overlays only
-  document.getElementById("blurName").classList.remove("hidden");
-  document.getElementById("blurImage").classList.remove("hidden");
 
   guessInput.value = "";
   guessInput.disabled = false;
@@ -604,13 +610,43 @@ function normalizeString(str) {
 
 function revealCharacter() {
   // 🔹 Hide the blur overlays (revealing the name and image area)
-  document.getElementById("blurName").classList.add("hidden");
-  document.getElementById("blurImage").classList.add("hidden");
+  hideBlurOverlays();
 
   // 🔹 Stop timer and disable input
   clearInterval(timerInterval);
   guessInput.disabled = true;
   submitGuessBtn.disabled = true;
+}
+
+function showBlurOverlays() {
+  if (blurName) {
+    blurName.classList.remove("hidden");
+  }
+
+  if (blurImage) {
+    blurImage.classList.remove("hidden");
+  }
+
+  if (gameCardImage) {
+    gameCardImage.classList.remove("revealed");
+  }
+}
+
+function hideBlurOverlays() {
+  if (blurName) {
+    blurName.classList.add("hidden");
+  }
+
+  if (blurImage) {
+    blurImage.classList.add("hidden");
+  }
+
+  if (gameCardImage) {
+    // Force reflow to restart animation if needed
+    gameCardImage.classList.remove("revealed");
+    void gameCardImage.offsetWidth;
+    gameCardImage.classList.add("revealed");
+  }
 }
 
 

@@ -18,7 +18,7 @@ body {
 h1 {
   font-size: 2.5em;
   margin: 20px 0;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 /* Mode Toggle */
@@ -26,7 +26,7 @@ h1 {
   display: flex;
   gap: 15px;
   margin-bottom: 30px;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   padding: 5px;
   border-radius: 50px;
   backdrop-filter: blur(10px);
@@ -45,18 +45,18 @@ h1 {
 }
 
 .mode-btn:hover {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .mode-btn.active {
   background: #ffeb3b;
   color: #1e3c72;
-  box-shadow: 0 4px 15px rgba(255,235,59,0.4);
+  box-shadow: 0 4px 15px rgba(255, 235, 59, 0.4);
 }
 
 /* Spin Mode Styles */
 .progress {
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.2);
   padding: 10px 20px;
   border-radius: 25px;
   margin-bottom: 20px;
@@ -81,7 +81,7 @@ h1 {
   border-right: 20px solid transparent;
   border-top: 40px solid #ffeb3b;
   z-index: 10;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 #wheel {
@@ -89,7 +89,7 @@ h1 {
   height: 100%;
   border-radius: 50%;
   border: 8px solid #ffeb3b;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
   transition: transform 5s cubic-bezier(0.17, 0.67, 0.12, 0.99);
   position: relative;
   overflow: hidden;
@@ -111,7 +111,7 @@ h1 {
   font-size: 14px;
   font-weight: bold;
   color: #1e3c72;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   z-index: 5;
   border: 3px solid white;
 }
@@ -125,7 +125,7 @@ h1 {
   font-size: 20px;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 6px 20px rgba(255,235,59,0.4);
+  box-shadow: 0 6px 20px rgba(255, 235, 59, 0.4);
   transition: all 0.3s;
   margin: 30px auto 10px auto;
   display: block;
@@ -135,7 +135,7 @@ h1 {
 #spin-btn:hover:not(:disabled) {
   background: #fdd835;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255,235,59,0.6);
+  box-shadow: 0 8px 25px rgba(255, 235, 59, 0.6);
 }
 
 #spin-btn:disabled {
@@ -147,7 +147,7 @@ h1 {
   margin-top: 20px;
   font-size: 20px;
   text-align: center;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   padding: 20px;
   border-radius: 15px;
   backdrop-filter: blur(10px);
@@ -158,13 +158,13 @@ h1 {
 #result img {
   margin-top: 15px;
   border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   max-width: 200px;
 }
 
 .category-badge {
   display: inline-block;
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.2);
   padding: 5px 15px;
   border-radius: 20px;
   font-size: 14px;
@@ -181,7 +181,7 @@ h1 {
 }
 
 .stat-box {
-  background: rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.15);
   padding: 15px 30px;
   border-radius: 15px;
   backdrop-filter: blur(10px);
@@ -210,7 +210,7 @@ h1 {
   width: 100%;
   max-width: 400px;
   height: 30px;
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 15px;
   overflow: hidden;
   margin: 0 auto 10px;
@@ -247,14 +247,14 @@ h1 {
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 6px 20px rgba(255,235,59,0.4);
+  box-shadow: 0 6px 20px rgba(255, 235, 59, 0.4);
   transition: all 0.3s;
 }
 
 .game-btn:hover:not(:disabled) {
   background: #fdd835;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255,235,59,0.6);
+  box-shadow: 0 8px 25px rgba(255, 235, 59, 0.6);
 }
 
 .game-btn:disabled {
@@ -263,12 +263,12 @@ h1 {
 }
 
 .game-btn.secondary {
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.2);
   color: #fff;
 }
 
 .game-btn.secondary:hover:not(:disabled) {
-  background: rgba(255,255,255,0.3);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .card-display {
@@ -283,12 +283,12 @@ h1 {
   width: 100%;
 }
 
+
 .game-card {
   width: 100%;
   height: auto;
   border-radius: 16px;
-  box-shadow: 0 15px 50px rgba(0,0,0,0.5);
-  transition: all 0.5s ease;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
 }
 
 .game-card.blurred {
@@ -297,12 +297,6 @@ h1 {
 
 .game-card.revealed {
   filter: blur(0);
-  animation: revealCard 0.5s ease;
-}
-
-@keyframes revealCard {
-  0% { filter: blur(20px); transform: scale(0.95); }
-  100% { filter: blur(0); transform: scale(1); }
 }
 
 .blur-overlay {
@@ -317,7 +311,6 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.5s ease;
 }
 
 .blur-overlay.hidden {
@@ -334,8 +327,15 @@ h1 {
 }
 
 @keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
 }
 
 .guess-input-container {
@@ -351,7 +351,7 @@ h1 {
   border: 3px solid #ffeb3b;
   border-radius: 50px;
   font-size: 18px;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   color: #fff;
   backdrop-filter: blur(10px);
   min-width: 300px;
@@ -360,12 +360,12 @@ h1 {
 }
 
 #guessInput::placeholder {
-  color: rgba(255,255,255,0.5);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 #guessInput:focus {
-  background: rgba(255,255,255,0.2);
-  box-shadow: 0 0 20px rgba(255,235,59,0.3);
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 20px rgba(255, 235, 59, 0.3);
 }
 
 #submitGuessBtn {
@@ -383,7 +383,7 @@ h1 {
 #submitGuessBtn:hover {
   background: #45a049;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(76,175,80,0.4);
+  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
 }
 
 #submitGuessBtn:disabled {
@@ -398,7 +398,7 @@ h1 {
   padding: 20px;
   border-radius: 15px;
   min-height: 60px;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   max-width: 600px;
   margin-left: auto;
@@ -406,7 +406,7 @@ h1 {
 }
 
 .hint-box {
-  background: rgba(255,235,59,0.2);
+  background: rgba(255, 235, 59, 0.2);
   padding: 15px 25px;
   border-radius: 15px;
   margin: 20px auto;
@@ -428,14 +428,31 @@ h1 {
 }
 
 @keyframes correctBounce {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
 }
 
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-10px); }
-  75% { transform: translateX(10px); }
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-10px);
+  }
+
+  75% {
+    transform: translateX(10px);
+  }
 }
 
 /* Card Popup (Spin Mode) */
@@ -455,8 +472,13 @@ h1 {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 #cardPopupContent {
@@ -469,8 +491,15 @@ h1 {
 }
 
 @keyframes scaleIn {
-  from { transform: scale(0.5); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 #popupImage {
@@ -491,7 +520,7 @@ h1 {
   font-size: 24px;
   font-weight: bold;
   color: #ffeb3b;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .popup-category {
@@ -512,11 +541,11 @@ h1 {
     width: 300px;
     height: 300px;
   }
-  
+
   h1 {
     font-size: 1.8em;
   }
-  
+
   .wheel-center {
     width: 50px;
     height: 50px;
@@ -571,14 +600,30 @@ h1 {
 #gameCardImage {
   width: 100%;
   border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-  transition: all 0.4s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+#gameCardImage.revealed {
+  animation: revealCard 0.4s ease;
+}
+
+@keyframes revealCard {
+  0% {
+    filter: blur(12px);
+    transform: scale(0.96);
+  }
+
+  100% {
+    filter: blur(0);
+    transform: scale(1);
+  }
 }
 
 /* Disable full-card blur */
 .game-card.blurred {
   filter: none !important;
 }
+
 .game-card.revealed {
   filter: none !important;
   transform: scale(1);
@@ -588,26 +633,34 @@ h1 {
 .blur-name,
 .blur-image {
   position: absolute;
-  backdrop-filter: blur(16px); /* slightly stronger blur */
+  backdrop-filter: blur(16px);
+  /* slightly stronger blur */
   background: rgba(0, 0, 0, 0.35);
   border-radius: 10px;
-  transition: opacity 0.6s ease, visibility 0.6s ease;
 }
 
 /* Name area blur — wider & taller */
 .blur-name {
-  top: 1%;       /* moved up slightly */
-  left: 8%;      /* wider */
-  width: 60%;    /* wider */
-  height: 9%;   /* taller */
+  top: 1%;
+  /* moved up slightly */
+  left: 8%;
+  /* wider */
+  width: 60%;
+  /* wider */
+  height: 9%;
+  /* taller */
 }
 
 /* Portrait area blur — covers more space */
 .blur-image {
-  top: 10%;      /* higher (starts closer to top) */
-  left: 8%;      /* wider */
-  width: 84%;    /* wider */
-  height: 40%;   /* taller coverage */
+  top: 10%;
+  /* higher (starts closer to top) */
+  left: 8%;
+  /* wider */
+  width: 84%;
+  /* wider */
+  height: 40%;
+  /* taller coverage */
 }
 
 .hidden {
