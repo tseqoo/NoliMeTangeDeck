@@ -17,6 +17,8 @@ const guessInput = document.getElementById("guessInput");
 const submitGuessBtn = document.getElementById("submitGuessBtn");
 const gameCardImage = document.getElementById("gameCardImage");
 const blurOverlay = document.getElementById("blurOverlay");
+const blurName = document.getElementById("blurName");
+const blurImage = document.getElementById("blurImage");
 const gameResult = document.getElementById("gameResult");
 const hintBox = document.getElementById("hintBox");
 const timerFill = document.getElementById("timerFill");
@@ -25,73 +27,234 @@ const scoreValue = document.getElementById("scoreValue");
 const streakValue = document.getElementById("streakValue");
 const roundValue = document.getElementById("roundValue");
 
+if (gameCardImage) {
+  gameCardImage.setAttribute("draggable", "false");
+  gameCardImage.addEventListener("dragstart", (event) => event.preventDefault());
+  gameCardImage.addEventListener("contextmenu", (event) => event.preventDefault());
+}
+
 // 51 characters from Noli Me Tangere - organized by category
 const characters = [
   // A. Main / Central Characters (16)
-  { name: "Juan Crisóstomo Ibarra y Magsalin", category: "Main Character" },
+  {
+    name: "Juan Crisóstomo Ibarra y Magsalin", category: "Main Character", answers: [
+      "Crisóstomo Ibarra",
+      "Juan Crisóstomo Ibarra",
+      "Juan Crisóstomo Ibarra y Magsalin",
+    ]
+  },
   { name: "María Clara", category: "Main Character" },
   { name: "Elías", category: "Main Character" },
-  { name: "Captain Tiago", category: "Main Character" },
-  { name: "Father Dámaso Verdolagas", category: "Main Character" },
-  { name: "Father Salvi", category: "Main Character" },
+  {
+    name: "Kapitan Tiago", category: "Main Character", answers: [
+      "Kapitán Tiago",
+      "Captain Tiago",
+      "Santiago de los Santos"
+    ]
+  },
+  {
+    name: "Padre Dámaso", category: "Main Character", answers: [
+      "Padre Dámaso",
+      "Father Dámaso",
+      "Fray Damaso"
+    ]
+  },
+  {
+    name: "Padre Salvi", category: "Main Character", answers: [
+      "Padre Salvi",
+      "Father Salvi",
+      "Fray Salvi"
+    ]
+  },
   { name: "Don Rafael Ibarra", category: "Main Character" },
   { name: "Pilosopo Tasyo", category: "Main Character" },
-  { name: "Doña Victorina de los Reyes de Espadaña", category: "Main Character" },
-  { name: "Don Tiburcio de Espadaña", category: "Main Character" },
+  {
+    name: "Doña Victorina", category: "Main Character", answers: [
+      "Doña Victorina",
+      "Doña Victorina de los Reyes de Espadaña",
+    ]
+  },
+  {
+    name: "Don Tiburcio", category: "Main Character", answers: [
+      "Don Tiburcio",
+      "Don Tiburcio de Espadaña",
+      "Tiburcio",
+    ]
+  },
   { name: "Sisa", category: "Main Character" },
   { name: "Basilio", category: "Main Character" },
   { name: "Crispin", category: "Main Character" },
-  { name: "Doña Consolación", category: "Main Character" },
-  { name: "The Ensign (The Alférez)", category: "Main Character" },
+  {
+    name: "Doña Consolación", category: "Main Character", answers: [
+      "Doña Consolación",
+      "Donya Consolacion",
+    ]
+  },
+  {
+    name: "Ensign (Alférez)", category: "Main Character", answers: [
+      "Ensign",
+      "Ensign (Alférez)",
+      "The Ensign",
+      "The Alférez",
+      "Alférez",
+    ]
+  },
   { name: "Father Sibyla", category: "Main Character" },
-  
+
   // B. Clergy / Church Workers (2)
-  { name: "The Chief Sexton", category: "Clergy / Church Workers" },
-  { name: "The Gravedigger", category: "Clergy / Church Workers" },
-  
+  {
+    name: "The Chief Sexton", category: "Clergy / Church Workers", answers: [
+      "The Chief Sexton",
+      "Chief Sexton",
+      "Sexton",
+    ]
+  },
+  {
+    name: "The Gravedigger", category: "Clergy / Church Workers", answers: [
+      "The Gravedigger",
+      "Gravedigger",
+    ]
+  },
+
   // C. Government / Authority Figures (8)
-  { name: "Lt. Guevara", category: "Government / Authority Figures" },
-  { name: "The Mayor", category: "Government / Authority Figures" },
-  { name: "Captain General", category: "Government / Authority Figures" },
-  { name: "Don Filipo", category: "Government / Authority Figures" },
-  { name: "Captain Basilio", category: "Government / Authority Figures" },
-  { name: "Captain Tinong", category: "Government / Authority Figures" },
-  { name: "Captain Valentin", category: "Government / Authority Figures" },
-  { name: "Captain Maria", category: "Government / Authority Figures" },
-  
+  {
+    name: "Lt. Guevara", category: "Government / Authority Figures", answers: [
+      "Lt. Guevara",
+      "Lieutenant Guevara",
+      "Guevara",
+    ]
+  },
+  {
+    name: "The Mayor", category: "Government / Authority Figures",
+    answers: [
+      "The Mayor",
+      "Mayor",
+    ]
+  },
+  {
+    name: "Captain General", category: "Government / Authority Figures",
+    answers: [
+      "Captain General",
+      "Kapitan Heneral",
+    ]
+  },
+  {
+    name: "Don Filipo", category: "Government / Authority Figures", answers: [
+      "Don Filipo",
+      "Filipo",
+    ]
+  },
+  {
+    name: "Captain Basilio", category: "Government / Authority Figures", answers: [
+      "Captain Basilio",
+      "Basilio",
+    ]
+  },
+  {
+    name: "Captain Tinong", category: "Government / Authority Figures", answers: [
+      "Captain Tinong",
+      "Kapitan Tinong",
+      "Tinong",
+    ]
+  },
+  {
+    name: "Captain Valentin", category: "Government / Authority Figures", answers: [
+      "Captain Valentin",
+      "Kapitan Valentin",
+      "Valentin",
+    ]
+  },
+  {
+    name: "Captain Maria", category: "Government / Authority Figures", answers: [
+      "Captain Maria",
+      "Kapitan Maria",
+      "Maria",
+    ]
+  },
+
   // D. Upper-Class / Educated Citizens (9)
-  { name: "Doña Pia Alba", category: "Upper-Class / Educated Citizens" },
-  { name: "Aunt Isabel", category: "Upper-Class / Educated Citizens" },
+  {
+    name: "Doña Pia Alba", category: "Upper-Class / Educated Citizens", answers: [
+      "Doña Pia Alba",
+      "Donya Pia Alba",
+      "Pia Alba",
+    ]
+  },
+  {
+    name: "Aunt Isabel", category: "Upper-Class / Educated Citizens", answers: [
+      "Aunt Isabel",
+      "Tía Isabel",
+      "Isabel",
+    ]
+  },
   { name: "Linares", category: "Upper-Class / Educated Citizens" },
-  { name: "Don Pedro Eibarramendia", category: "Upper-Class / Educated Citizens" },
-  { name: "Don Saturnino", category: "Upper-Class / Educated Citizens" },
-  { name: "Don Primitivo", category: "Upper-Class / Educated Citizens" },
-  { name: "The Schoolmaster", category: "Upper-Class / Educated Citizens" },
-  { name: "The Yellowish Individual", category: "Upper-Class / Educated Citizens" },
+  {
+    name: "Don Pedro Eibarramendia", category: "Upper-Class / Educated Citizens", answers: [
+      "Don Pedro Eibarramendia",
+      "Pedro Eibarramendia",
+    ]
+  },
+  {
+    name: "Don Saturnino", category: "Upper-Class / Educated Citizens", answers: [
+      "Don Saturnino",
+      "Saturnino",
+    ]
+  },
+  {
+    name: "Don Primitivo", category: "Upper-Class / Educated Citizens", answers: [
+      "Don Primitivo",
+      "Primitivo",
+    ]
+  },
+  {
+    name: "The Schoolmaster", category: "Upper-Class / Educated Citizens", answers: [
+      "The Schoolmaster",
+      "Schoolmaster",
+    ]
+  },
+  {
+    name: "The Yellowish Individual", category: "Upper-Class / Educated Citizens", answers: [
+      "The Yellowish Individual",
+      "Yellowish Individual",
+    ]
+  },
   { name: "Tinchang", category: "Upper-Class / Educated Citizens" },
-  
+
   // E. Commoners / Poor or Working-Class (9)
   { name: "Lucas", category: "Commoners / Poor or Working-Class" },
   { name: "Tarsilo Alasigan", category: "Commoners / Poor or Working-Class" },
   { name: "Bruno Alasigan", category: "Commoners / Poor or Working-Class" },
-  { name: "Captain Pablo", category: "Commoners / Poor or Working-Class" },
+  {
+    name: "Captain Pablo", category: "Commoners / Poor or Working-Class", answers: [
+      "Captain Pablo",
+      "Kapitan Pablo",
+      "Pablo",
+    ]
+  },
   { name: "Nol Juan", category: "Commoners / Poor or Working-Class" },
   { name: "Balat", category: "Commoners / Poor or Working-Class" },
   { name: "Carlicos", category: "Commoners / Poor or Working-Class" },
   { name: "Andong", category: "Commoners / Poor or Working-Class" },
   { name: "Hermana Rufa", category: "Commoners / Poor or Working-Class" },
-  
+
   // F. María Clara's Friends (5)
   { name: "Iday", category: "María Clara's Friends" },
   { name: "Sinang", category: "María Clara's Friends" },
   { name: "Andeng", category: "María Clara's Friends" },
   { name: "Victoria", category: "María Clara's Friends" },
   { name: "Neneng", category: "María Clara's Friends" },
-  
+
   // G. Other Supporting / Minor Townsfolk (2)
   { name: "Albino", category: "Other Supporting / Minor Townsfolk" },
   { name: "Leon", category: "Other Supporting / Minor Townsfolk" }
 ];
+
+// Ensure every character exposes at least one acceptable answer
+characters.forEach((character) => {
+  if (!character.answers || character.answers.length === 0) {
+    character.answers = [character.name];
+  }
+});
 
 let remainingIndices = characters.map((_, i) => i);
 let currentRotation = 0;
@@ -123,29 +286,29 @@ function createWheel() {
   canvas.width = 400;
   canvas.height = 400;
   const ctx = canvas.getContext('2d');
-  
+
   const centerX = 200;
   const centerY = 200;
   const radius = 200;
   const segmentAngle = (Math.PI * 2) / 51;
-  
+
   characters.forEach((character, index) => {
     const startAngle = index * segmentAngle - Math.PI / 2;
     const endAngle = startAngle + segmentAngle;
-    
+
     ctx.beginPath();
     ctx.moveTo(centerX, centerY);
     ctx.arc(centerX, centerY, radius, startAngle, endAngle);
     ctx.closePath();
-    
+
     const baseColor = categoryColors[character.category];
     ctx.fillStyle = index % 2 === 0 ? baseColor : shadeColor(baseColor, -15);
     ctx.fill();
-    
+
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
     ctx.lineWidth = 1;
     ctx.stroke();
-    
+
     ctx.save();
     ctx.translate(centerX, centerY);
     ctx.rotate(startAngle + segmentAngle / 2);
@@ -158,19 +321,19 @@ function createWheel() {
     ctx.fillText((index + 1).toString(), radius * 0.75, 0);
     ctx.restore();
   });
-  
+
   wheel.style.backgroundImage = `url(${canvas.toDataURL()})`;
   wheel.style.backgroundSize = 'cover';
 }
 
 function shadeColor(color, percent) {
-  const num = parseInt(color.replace("#",""), 16);
+  const num = parseInt(color.replace("#", ""), 16);
   const amt = Math.round(2.55 * percent);
   const R = (num >> 16) + amt;
   const G = (num >> 8 & 0x00FF) + amt;
   const B = (num & 0x0000FF) + amt;
-  return "#" + (0x1000000 + (R<255?R<1?0:R:255)*0x10000 +
-    (G<255?G<1?0:G:255)*0x100 + (B<255?B<1?0:B:255))
+  return "#" + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 +
+    (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 + (B < 255 ? B < 1 ? 0 : B : 255))
     .toString(16).slice(1);
 }
 
@@ -207,7 +370,7 @@ spinBtn.addEventListener("click", () => {
   const targetAngle = selectedIndex * segmentAngle;
   const spins = 360 * 8;
   const finalRotation = spins + (360 - targetAngle) + (segmentAngle / 2);
-  
+
   currentRotation += finalRotation;
 
   wheel.style.transform = `rotate(${currentRotation}deg)`;
@@ -288,27 +451,27 @@ function startGame() {
   streak = 0;
   round = 0;
   gameCharacterPool = characters.map((_, i) => i);
-  
+
   updateStats();
-  
+
   startGameBtn.style.display = "none";
   skipBtn.style.display = "inline-block";
   revealBtn.style.display = "inline-block";
-  
+
   gameResult.innerHTML = "🎮 Game Started! Guess the character!";
   hintBox.innerHTML = "";
-  
+
   nextRound(false);
 }
 
 function stopGame() {
   gameActive = false;
   clearInterval(timerInterval);
-  
+
   startGameBtn.style.display = "inline-block";
   skipBtn.style.display = "none";
   revealBtn.style.display = "none";
-  
+
   gameResult.innerHTML = "";
   hintBox.innerHTML = "";
   gameCardImage.src = "";
@@ -330,15 +493,13 @@ function nextRound(wasCorrect) {
   currentCharacterIndex = gameCharacterPool[randomIndex];
   gameCharacterPool.splice(randomIndex, 1);
 
+  showBlurOverlays();
+
   const imageSrc = `cards/card${currentCharacterIndex + 1}.jpg`;
   gameCardImage.src = imageSrc;
   gameCardImage.onerror = () => {
     gameCardImage.src = `cards/card${currentCharacterIndex + 1}.png`;
   };
-
-  // ✅ Show blur overlays only
-  document.getElementById("blurName").classList.remove("hidden");
-  document.getElementById("blurImage").classList.remove("hidden");
 
   guessInput.value = "";
   guessInput.disabled = false;
@@ -355,15 +516,15 @@ function nextRound(wasCorrect) {
 }
 
 
-function startTimer() {
+function startTimer(initialTime = 30) {
   clearInterval(timerInterval);
-  timeRemaining = 30;
+  timeRemaining = initialTime;
   updateTimer();
-  
+
   timerInterval = setInterval(() => {
     timeRemaining--;
     updateTimer();
-    
+
     if (timeRemaining <= 0) {
       clearInterval(timerInterval);
       timeUp();
@@ -375,7 +536,7 @@ function updateTimer() {
   timerText.textContent = `${timeRemaining}s`;
   const percentage = (timeRemaining / 30) * 100;
   timerFill.style.width = `${percentage}%`;
-  
+
   if (timeRemaining <= 5) {
     timerFill.style.background = 'linear-gradient(90deg, #f44336, #e91e63)';
   } else if (timeRemaining <= 10) {
@@ -390,37 +551,37 @@ function timeUp() {
   revealCharacter();
   streak = 0;
   updateStats();
-  
+
   setTimeout(() => {
     nextRound(false);
   }, 3000);
 }
 
 function checkGuess() {
-  const guess = guessInput.value.trim().toLowerCase();
-  const correctName = characters[currentCharacterIndex].name.toLowerCase();
-  
-  if (guess === "") return;
-  
+  const rawGuess = guessInput.value.trim();
+  const normalizedGuess = normalizeString(rawGuess);
+  const currentCharacter = characters[currentCharacterIndex];
+  const normalizedAnswers = currentCharacter.answers.map(normalizeString);
+
+  if (normalizedGuess === "") return;
+
+  const previousTimeRemaining = timeRemaining;
   guessInput.disabled = true;
   submitGuessBtn.disabled = true;
   clearInterval(timerInterval);
-  
-  // Check for exact match or partial match (flexible matching)
-  const isCorrect = correctName === guess || 
-                    correctName.includes(guess) || 
-                    guess.includes(correctName) ||
-                    normalizeString(correctName) === normalizeString(guess);
-  
+
+  // Compare against predefined acceptable answers (case/diacritic insensitive)
+  const isCorrect = normalizedAnswers.includes(normalizedGuess);
+
   if (isCorrect) {
     score += Math.max(10, timeRemaining * 2);
     streak++;
     updateStats();
-    
-    gameResult.innerHTML = `<span class="correct-answer">🎉 Correct! It's <strong>${characters[currentCharacterIndex].name}</strong>! (+${Math.max(10, timeRemaining * 2)} points)</span>`;
+
+    gameResult.innerHTML = `<span class="correct-answer">🎉 Correct! It's <strong>${currentCharacter.name}</strong>! (+${Math.max(10, timeRemaining * 2)} points)</span>`;
     revealCharacter();
     startConfetti();
-    
+
     setTimeout(() => {
       stopConfetti();
       nextRound(true);
@@ -433,7 +594,9 @@ function checkGuess() {
     submitGuessBtn.disabled = false;
     guessInput.value = "";
     guessInput.focus();
-    startTimer();
+    if (previousTimeRemaining > 0) {
+      startTimer(previousTimeRemaining);
+    }
   }
 }
 
@@ -450,13 +613,43 @@ function normalizeString(str) {
 
 function revealCharacter() {
   // 🔹 Hide the blur overlays (revealing the name and image area)
-  document.getElementById("blurName").classList.add("hidden");
-  document.getElementById("blurImage").classList.add("hidden");
+  hideBlurOverlays();
 
   // 🔹 Stop timer and disable input
   clearInterval(timerInterval);
   guessInput.disabled = true;
   submitGuessBtn.disabled = true;
+}
+
+function showBlurOverlays() {
+  if (blurName) {
+    blurName.classList.remove("hidden");
+  }
+
+  if (blurImage) {
+    blurImage.classList.remove("hidden");
+  }
+
+  if (gameCardImage) {
+    gameCardImage.classList.remove("revealed");
+  }
+}
+
+function hideBlurOverlays() {
+  if (blurName) {
+    blurName.classList.add("hidden");
+  }
+
+  if (blurImage) {
+    blurImage.classList.add("hidden");
+  }
+
+  if (gameCardImage) {
+    // Force reflow to restart animation if needed
+    gameCardImage.classList.remove("revealed");
+    void gameCardImage.offsetWidth;
+    gameCardImage.classList.add("revealed");
+  }
 }
 
 
@@ -469,22 +662,22 @@ function updateStats() {
 function endGame() {
   gameActive = false;
   clearInterval(timerInterval);
-  
+
   gameResult.innerHTML = `
     <div style="font-size: 28px; margin-bottom: 15px;">🎊 Game Over! 🎊</div>
     <div style="font-size: 20px;">Final Score: <strong>${score}</strong></div>
     <div style="font-size: 18px; margin-top: 10px;">Total Rounds: ${round}</div>
     <div style="font-size: 18px;">Best Streak: ${streak}</div>
   `;
-  
+
   hintBox.innerHTML = "Click 'Start Game' to play again!";
-  
+
   startGameBtn.style.display = "inline-block";
   skipBtn.style.display = "none";
   revealBtn.style.display = "none";
   guessInput.disabled = true;
   submitGuessBtn.disabled = true;
-  
+
   if (score > 0) {
     startConfetti();
     setTimeout(stopConfetti, 3000);
