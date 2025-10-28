@@ -28,53 +28,201 @@ const roundValue = document.getElementById("roundValue");
 // 51 characters from Noli Me Tangere - organized by category
 const characters = [
   // A. Main / Central Characters (16)
-  { name: "Juan Crisóstomo Ibarra y Magsalin", category: "Main Character" },
+  {
+    name: "Juan Crisóstomo Ibarra y Magsalin", category: "Main Character", answers: [
+      "Crisóstomo Ibarra",
+      "Juan Crisóstomo Ibarra",
+      "Juan Crisóstomo Ibarra y Magsalin",
+    ]
+  },
   { name: "María Clara", category: "Main Character" },
   { name: "Elías", category: "Main Character" },
-  { name: "Captain Tiago", category: "Main Character" },
-  { name: "Father Dámaso Verdolagas", category: "Main Character" },
-  { name: "Father Salvi", category: "Main Character" },
+  {
+    name: "Kapitan Tiago", category: "Main Character", answers: [
+      "Kapitán Tiago",
+      "Captain Tiago",
+      "Santiago de los Santos"
+    ]
+  },
+  {
+    name: "Padre Dámaso", category: "Main Character", answers: [
+      "Padre Dámaso",
+      "Father Dámaso",
+      "Fray Damaso"
+    ]
+  },
+  {
+    name: "Padre Salvi", category: "Main Character", answers: [
+      "Padre Salvi",
+      "Father Salvi",
+      "Fray Salvi"
+    ]
+  },
   { name: "Don Rafael Ibarra", category: "Main Character" },
   { name: "Pilosopo Tasyo", category: "Main Character" },
-  { name: "Doña Victorina de los Reyes de Espadaña", category: "Main Character" },
-  { name: "Don Tiburcio de Espadaña", category: "Main Character" },
+  {
+    name: "Doña Victorina", category: "Main Character", answers: [
+      "Doña Victorina",
+      "Doña Victorina de los Reyes de Espadaña",
+    ]
+  },
+  {
+    name: "Don Tiburcio", category: "Main Character", answers: [
+      "Don Tiburcio",
+      "Don Tiburcio de Espadaña",
+      "Tiburcio",
+    ]
+  },
   { name: "Sisa", category: "Main Character" },
   { name: "Basilio", category: "Main Character" },
   { name: "Crispin", category: "Main Character" },
-  { name: "Doña Consolación", category: "Main Character" },
-  { name: "The Ensign (The Alférez)", category: "Main Character" },
+  {
+    name: "Doña Consolación", category: "Main Character", answers: [
+      "Doña Consolación",
+      "Donya Consolacion",
+    ]
+  },
+  {
+    name: "Ensign (Alférez)", category: "Main Character", answers: [
+      "Ensign",
+      "Ensign (Alférez)",
+      "The Ensign",
+      "The Alférez",
+      "Alférez",
+    ]
+  },
   { name: "Father Sibyla", category: "Main Character" },
 
   // B. Clergy / Church Workers (2)
-  { name: "The Chief Sexton", category: "Clergy / Church Workers" },
-  { name: "The Gravedigger", category: "Clergy / Church Workers" },
+  {
+    name: "The Chief Sexton", category: "Clergy / Church Workers", answers: [
+      "The Chief Sexton",
+      "Chief Sexton",
+      "Sexton",
+    ]
+  },
+  {
+    name: "The Gravedigger", category: "Clergy / Church Workers", answers: [
+      "The Gravedigger",
+      "Gravedigger",
+    ]
+  },
 
   // C. Government / Authority Figures (8)
-  { name: "Lt. Guevara", category: "Government / Authority Figures" },
-  { name: "The Mayor", category: "Government / Authority Figures" },
-  { name: "Captain General", category: "Government / Authority Figures" },
-  { name: "Don Filipo", category: "Government / Authority Figures" },
-  { name: "Captain Basilio", category: "Government / Authority Figures" },
-  { name: "Captain Tinong", category: "Government / Authority Figures" },
-  { name: "Captain Valentin", category: "Government / Authority Figures" },
-  { name: "Captain Maria", category: "Government / Authority Figures" },
+  {
+    name: "Lt. Guevara", category: "Government / Authority Figures", answers: [
+      "Lt. Guevara",
+      "Lieutenant Guevara",
+      "Guevara",
+    ]
+  },
+  {
+    name: "The Mayor", category: "Government / Authority Figures",
+    answers: [
+      "The Mayor",
+      "Mayor",
+    ]
+  },
+  {
+    name: "Captain General", category: "Government / Authority Figures",
+    answers: [
+      "Captain General",
+      "Kapitan Heneral",
+    ]
+  },
+  {
+    name: "Don Filipo", category: "Government / Authority Figures", answers: [
+      "Don Filipo",
+      "Filipo",
+    ]
+  },
+  {
+    name: "Captain Basilio", category: "Government / Authority Figures", answers: [
+      "Captain Basilio",
+      "Basilio",
+    ]
+  },
+  {
+    name: "Captain Tinong", category: "Government / Authority Figures", answers: [
+      "Captain Tinong",
+      "Kapitan Tinong",
+      "Tinong",
+    ]
+  },
+  {
+    name: "Captain Valentin", category: "Government / Authority Figures", answers: [
+      "Captain Valentin",
+      "Kapitan Valentin",
+      "Valentin",
+    ]
+  },
+  {
+    name: "Captain Maria", category: "Government / Authority Figures", answers: [
+      "Captain Maria",
+      "Kapitan Maria",
+      "Maria",
+    ]
+  },
 
   // D. Upper-Class / Educated Citizens (9)
-  { name: "Doña Pia Alba", category: "Upper-Class / Educated Citizens" },
-  { name: "Aunt Isabel", category: "Upper-Class / Educated Citizens" },
+  {
+    name: "Doña Pia Alba", category: "Upper-Class / Educated Citizens", answers: [
+      "Doña Pia Alba",
+      "Donya Pia Alba",
+      "Pia Alba",
+    ]
+  },
+  {
+    name: "Aunt Isabel", category: "Upper-Class / Educated Citizens", answers: [
+      "Aunt Isabel",
+      "Tía Isabel",
+      "Isabel",
+    ]
+  },
   { name: "Linares", category: "Upper-Class / Educated Citizens" },
-  { name: "Don Pedro Eibarramendia", category: "Upper-Class / Educated Citizens" },
-  { name: "Don Saturnino", category: "Upper-Class / Educated Citizens" },
-  { name: "Don Primitivo", category: "Upper-Class / Educated Citizens" },
-  { name: "The Schoolmaster", category: "Upper-Class / Educated Citizens" },
-  { name: "The Yellowish Individual", category: "Upper-Class / Educated Citizens" },
+  {
+    name: "Don Pedro Eibarramendia", category: "Upper-Class / Educated Citizens", answers: [
+      "Don Pedro Eibarramendia",
+      "Pedro Eibarramendia",
+    ]
+  },
+  {
+    name: "Don Saturnino", category: "Upper-Class / Educated Citizens", answers: [
+      "Don Saturnino",
+      "Saturnino",
+    ]
+  },
+  {
+    name: "Don Primitivo", category: "Upper-Class / Educated Citizens", answers: [
+      "Don Primitivo",
+      "Primitivo",
+    ]
+  },
+  {
+    name: "The Schoolmaster", category: "Upper-Class / Educated Citizens", answers: [
+      "The Schoolmaster",
+      "Schoolmaster",
+    ]
+  },
+  {
+    name: "The Yellowish Individual", category: "Upper-Class / Educated Citizens", answers: [
+      "The Yellowish Individual",
+      "Yellowish Individual",
+    ]
+  },
   { name: "Tinchang", category: "Upper-Class / Educated Citizens" },
 
   // E. Commoners / Poor or Working-Class (9)
   { name: "Lucas", category: "Commoners / Poor or Working-Class" },
   { name: "Tarsilo Alasigan", category: "Commoners / Poor or Working-Class" },
   { name: "Bruno Alasigan", category: "Commoners / Poor or Working-Class" },
-  { name: "Captain Pablo", category: "Commoners / Poor or Working-Class" },
+  {
+    name: "Captain Pablo", category: "Commoners / Poor or Working-Class", answers: [
+      "Captain Pablo",
+      "Kapitan Pablo",
+      "Pablo",
+    ]
+  },
   { name: "Nol Juan", category: "Commoners / Poor or Working-Class" },
   { name: "Balat", category: "Commoners / Poor or Working-Class" },
   { name: "Carlicos", category: "Commoners / Poor or Working-Class" },
@@ -92,6 +240,13 @@ const characters = [
   { name: "Albino", category: "Other Supporting / Minor Townsfolk" },
   { name: "Leon", category: "Other Supporting / Minor Townsfolk" }
 ];
+
+// Ensure every character exposes at least one acceptable answer
+characters.forEach((character) => {
+  if (!character.answers || character.answers.length === 0) {
+    character.answers = [character.name];
+  }
+});
 
 let remainingIndices = characters.map((_, i) => i);
 let currentRotation = 0;
@@ -399,7 +554,8 @@ function timeUp() {
 function checkGuess() {
   const rawGuess = guessInput.value.trim();
   const normalizedGuess = normalizeString(rawGuess);
-  const normalizedCorrect = normalizeString(characters[currentCharacterIndex].name);
+  const currentCharacter = characters[currentCharacterIndex];
+  const normalizedAnswers = currentCharacter.answers.map(normalizeString);
 
   if (normalizedGuess === "") return;
 
@@ -407,15 +563,15 @@ function checkGuess() {
   submitGuessBtn.disabled = true;
   clearInterval(timerInterval);
 
-  // Compare normalized strings to enforce case-insensitive exact matches
-  const isCorrect = normalizedGuess === normalizedCorrect;
+  // Compare against predefined acceptable answers (case/diacritic insensitive)
+  const isCorrect = normalizedAnswers.includes(normalizedGuess);
 
   if (isCorrect) {
     score += Math.max(10, timeRemaining * 2);
     streak++;
     updateStats();
 
-    gameResult.innerHTML = `<span class="correct-answer">🎉 Correct! It's <strong>${characters[currentCharacterIndex].name}</strong>! (+${Math.max(10, timeRemaining * 2)} points)</span>`;
+    gameResult.innerHTML = `<span class="correct-answer">🎉 Correct! It's <strong>${currentCharacter.name}</strong>! (+${Math.max(10, timeRemaining * 2)} points)</span>`;
     revealCharacter();
     startConfetti();
 
